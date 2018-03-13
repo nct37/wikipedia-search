@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // UI elements
+  // UI elements //
+
   const search = document.getElementById('search'),
     resultsList = document.getElementById('results'),
     close = document.getElementById('close'),
     searchField = document.getElementById('search-field');
+  // Event listeners //
 
-  // Event listener
   search.addEventListener('keyup', (e) => {
     e.preventDefault();
     clearHeading();
@@ -20,14 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   close.addEventListener('click', () => search.value = '');
-
-  // Helper functions
+  // Helper functions //
 
   // Create lis from data
   function addLi(arr) {
     let acc = 0,
       i = 0;
-    clearHeading();
     handleUlDisplay(arr);
 
     if (resultsList.hasChildNodes()) { // Clear li with each keyup and repopulate with updated data
@@ -51,10 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Clear the heading and wikipedia logo when entering search
   function clearHeading() {
-    (search.value === '') ? searchField.style.display = 'initial': searchField.style.display = 'none';
+    if (search.value === '') {
+      searchField.style.display = 'initial';
+      document.body.style.margin = "1% 30%";
+    } else {
+      searchField.style.display = 'none';
+      document.body.style.margin = "1% 21%";
+    }
   }
 
+  // If there's no data returned from the api, hide the ul completely
   function handleUlDisplay(arrNoData) {
     if (search.value === '' || arrNoData[1].length === 0) {
       resultsList.style.visibility = 'hidden';
