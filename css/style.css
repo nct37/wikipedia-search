@@ -1,9 +1,6 @@
 body {
   margin: 1% 21%;
 }
-body::after {
-  opacity: 0.4;
-}
 p {
   font-family: Arial;
   line-height: 1.5em;
@@ -29,11 +26,11 @@ img {
 }
 #more {
   color: yellow;
-  border-radius: 50px;
-  zoom: 50%;
+  border-radius: 20px;
+  zoom: 70%;
 }
 .more-about {
-  font-size: .9em;
+  font-size: 1em;
   font-style: italic;
   color: black;
   padding-right: 3%;

@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(searchUrl)
       .then(resp => resp.json())
       .then(data => addLi(data))
-      .catch(error => console.log('Please see the error: ' + error))
+      .catch(error => console.log('Please see the error: ' + error));
   });
 
   close.addEventListener('click', () => search.value = '');
@@ -25,22 +25,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Create lis from data
   function addLi(arr) {
-    console.log(arr);
-    clearHeading();
-    handleUlDisplay();
     let acc = 0,
       i = 0;
+    clearHeading();
+    handleUlDisplay(arr);
+
     if (resultsList.hasChildNodes()) { // Clear li with each keyup and repopulate with updated data
       resultsList.innerHTML = '';
     }
-    while (i < 11) {
+    while (i <= 10) {
       let content1 = arr[1][acc],
         content2 = arr[2][acc],
         content3 = arr[3][acc],
         contentBuilt = `<div>
                          <span class="flow-text">${content1}</span>
                          <p>${content2}</p>
-                         <span class="more-about">More about...</span><a href="${content3}" class="waves-effect waves-light btn flow-text teal lighten-2 z-depth-5" id="more" target="_blank">${content1}</a>
+                         <span class="more-about">More about...</span><a href="${content3}" class="waves-effect waves-light btn teal lighten-2 flow-text z-depth-5" id="more" target="_blank">${content1}</a>
                         </div`;
       let listItem = document.createElement('li');
       listItem.className = 'collection-item';
@@ -55,21 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
     (search.value === '') ? searchField.style.display = 'initial': searchField.style.display = 'none';
   }
 
-  function handleUlDisplay() {
-    if (search.value === '') {
-      backgroundUIRemoveLogo();
+  function handleUlDisplay(arrNoData) {
+    if (search.value === '' || arrNoData[1].length === 0) {
       resultsList.style.visibility = 'hidden';
     } else {
-      backgroundUIAddLogo();
       resultsList.style.visibility = 'visible';
     }
-  }
-
-  function backgroundUIRemoveLogo() {
-    document.body.style.background = '';
-  }
-
-  function backgroundUIAddLogo() {
-    document.body.style.background = 'url("/img/wiki-black.png") no-repeat fixed center';
   }
 });
