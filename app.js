@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(searchUrl)
       .then(resp => resp.json())
       .then(data => addLi(data))
-      .catch(error => console.log('Please see the error: ' + error));
+      .catch(error => console.log(`Please see the error:  ${error}`));
   });
 
   close.addEventListener('click', () => search.value = '');
@@ -52,12 +52,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Clear the heading and wikipedia logo when entering search
   function clearHeading() {
-    if (search.value === '') {
-      searchField.style.display = 'initial';
-      document.body.style.margin = "1% 30%";
-    } else {
-      searchField.style.display = 'none';
-      document.body.style.margin = "1% 21%";
+    let screenSize = window.innerWidth;
+
+    if (screenSize > 500) {
+      if (search.value === '') {
+        searchField.style.display = 'initial';
+        document.body.style.margin = "1% 30%";
+      } else {
+        searchField.style.display = 'none';
+        document.body.style.margin = "1% 21%";
+      }
+    }
+
+    if (screenSize <= 500) {
+      if (search.value === '') {
+        searchField.style.display = 'block';
+        document.body.style.margin = 'auto';
+      } else {
+        searchField.style.display = 'none';
+        document.body.style.margin = 'auto';
+      }
     }
   }
 
